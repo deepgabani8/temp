@@ -1,0 +1,6 @@
+VL53L1X Ultra Lite Driver / Linux user space porting
+
+This delivery is based on VL53L1X_ULD_API_V3.4.0 release (tag uld_3.4.0) modified as following:
+- None
+
+See README.txt file about build details
