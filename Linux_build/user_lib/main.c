@@ -108,16 +108,16 @@ int main(int argc, char **argv)
 	status += VL53L1X_SetInterMeasurementInMs(Dev, 100);
 	status += VL53L1X_StartRanging(Dev);
 
-//	calibration_status = VL53L1X_CalibrateOffset(Dev, 140, &offset); /* may take few second to perform the offset cal*/
-//	printf("Offset calibration status: %d. Offset: %X\n", calibration_status, offset);
-//	calibration_status = VL53L1X_CalibrateXtalk(Dev, 1000, &xtalk); /* may take few second to perform the xtalk cal */
-//	printf("Crosstalk calibration status: %d. Xtalk: %X\n", calibration_status, xtalk);
+	calibration_status = VL53L1X_CalibrateOffset(Dev, 140, &offset); /* may take few second to perform the offset cal*/
+	printf("Offset calibration status: %d. Offset: %X\n", calibration_status, offset);
+	calibration_status = VL53L1X_CalibrateXtalk(Dev, 1000, &xtalk); /* may take few second to perform the xtalk cal */
+	printf("Crosstalk calibration status: %d. Xtalk: %X\n", calibration_status, xtalk);
 
 	int16_t get_offset;
 	uint16_t get_xtalk;
 	calibration_status = VL53L1X_GetOffset(Dev, &get_offset);
 	calibration_status = VL53L1X_GetXtalk(Dev, &get_xtalk);
-	printf("offset: %X and xtalk: %X", get_offset, get_xtalk);
+	printf("Fetched offset: %X\nFetched xtalk: %X\n", get_offset, get_xtalk);
 
 	/* read and display data loop */
 	while (1) {
