@@ -59,11 +59,14 @@ int main(int argc, char **argv)
 	int adapter_nr = 0;
 	int file = 0;
 	int status;
+	int calibration_status;
 	uint8_t byteData, sensorState = 0;
 	uint16_t wordData;
 	VL53L1X_Result_t Results;
 	uint8_t first_range = 1;
 	uint8_t I2cDevAddr = 0x29;
+	int16_t offset;
+	uint16_t xtalk;
 
 	if (argc < 2) {
 		printf("Please pass the I2C bus number (default = 1)\n");
@@ -104,6 +107,17 @@ int main(int argc, char **argv)
 	status += VL53L1X_SetTimingBudgetInMs(Dev, 100);
 	status += VL53L1X_SetInterMeasurementInMs(Dev, 100);
 	status += VL53L1X_StartRanging(Dev);
+
+//	calibration_status = VL53L1X_CalibrateOffset(Dev, 140, &offset); /* may take few second to perform the offset cal*/
+//	printf("Offset calibration status: %d. Offset: %X\n", calibration_status, offset);
+//	calibration_status = VL53L1X_CalibrateXtalk(Dev, 1000, &xtalk); /* may take few second to perform the xtalk cal */
+//	printf("Crosstalk calibration status: %d. Xtalk: %X\n", calibration_status, xtalk);
+
+	int16_t get_offset;
+	uint16_t get_xtalk;
+	calibration_status = VL53L1X_GetOffset(Dev, &get_offset);
+	calibration_status = VL53L1X_GetXtalk(Dev, &get_xtalk);
+	printf("offset: %X and xtalk: %X", get_offset, get_xtalk);
 
 	/* read and display data loop */
 	while (1) {
