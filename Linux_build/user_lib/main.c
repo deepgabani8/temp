@@ -97,23 +97,19 @@ int main(int argc, char **argv)
 	status += VL53L1X_StartRanging(Dev);
 
 	int calibration_choice;
-	printf("Enter 1 - offset calibration\nEnter 2 - crosstalk calibration\nYour choice: ");
+	printf("-----Choose calibration type-----\n1) offset calibration\n2) crosstalk calibration\nYour choice: ");
 	scanf("%d", &calibration_choice);
 
-	if(calibration_choice == 1) {
-		uint16_t target_distance;
-		printf("Starting offset calibration...\n");
-		printf("Enter target distance (mm): ");
-		scanf("%hu", &target_distance);
+	uint16_t target_distance;
+	printf("Enter target distance (mm): ");
+	scanf("%hu", &target_distance);
 
+	if(calibration_choice == 1) {
+		printf("Starting offset calibration...\n");
 		calibration_status = VL53L1X_CalibrateOffset(Dev, target_distance, &offset); /* may take few second to perform the offset cal*/
 		printf("Offset calibration status: %d. \nOffset correction value: %X\n", calibration_status, offset);
 	} else if(calibration_choice == 2) {
-		uint16_t target_distance;
 		printf("Starting crosstalk calibration...\n");
-		printf("Enter target distance (mm): ");
-		scanf("%hu", &target_distance);
-
 		calibration_status = VL53L1X_CalibrateXtalk(Dev, target_distance, &xtalk); /* may take few second to perform the xtalk cal */
 		printf("Crosstalk calibration status: %d. \nCrosstalk correction value: %X\n", calibration_status, xtalk);
 	}
@@ -126,7 +122,7 @@ int main(int argc, char **argv)
 
 	/* read and display data loop */
 	int counter;
-	for(counter = 0; counter < 5;) {
+	for(counter = 0; counter < 5; counter++) {
 #if defined(POLLING)
 		uint8_t dataReady = 0;
 
