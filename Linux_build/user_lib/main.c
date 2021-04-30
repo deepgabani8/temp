@@ -111,7 +111,7 @@ int main(int argc, char **argv)
 	} else if(calibration_choice == 2) {
 		printf("Starting crosstalk calibration...\n");
 		calibration_status = VL53L1X_CalibrateXtalk(Dev, target_distance, &xtalk); /* may take few second to perform the xtalk cal */
-		printf("Crosstalk calibration status: %d\nCrosstalk correction value: %X\n", calibration_status, xtalk);
+		printf("Crosstalk calibration status: %d\nCrosstalk correction value: %hu\n", calibration_status, xtalk);
 	}
 	printf("-----Lidar Readings-----\n");
 
