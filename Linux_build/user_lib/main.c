@@ -97,7 +97,7 @@ int main(int argc, char **argv)
 	status += VL53L1X_StartRanging(Dev);
 
 	int calibration_choice;
-	printf("-----Select Calibration Type-----\nFor Offset Calibration, Enter 1\nFor Crosstalk Calibration Enter 2\nYour choice: ");
+	printf("-----Select Calibration Type-----\n1 - Offset Calibration\n2 - Crosstalk Calibration\nYour choice (1 or 2): ");
 	scanf("%d", &calibration_choice);
 
 	uint16_t target_distance;
