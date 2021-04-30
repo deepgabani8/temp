@@ -97,7 +97,7 @@ int main(int argc, char **argv)
 	status += VL53L1X_StartRanging(Dev);
 
 	int calibration_choice;
-	printf("-----Choose calibration type-----\n1) offset calibration\n2) crosstalk calibration\nYour choice: ");
+	printf("-----Calibration Types-----\n1) Offset Calibration\n2) Crosstalk Calibration\nYour choice: ");
 	scanf("%d", &calibration_choice);
 
 	uint16_t target_distance;
@@ -107,12 +107,16 @@ int main(int argc, char **argv)
 	if(calibration_choice == 1) {
 		printf("Starting offset calibration...\n");
 		calibration_status = VL53L1X_CalibrateOffset(Dev, target_distance, &offset); /* may take few second to perform the offset cal*/
-		printf("Offset calibration status: %d. \nOffset correction value: %X\n", calibration_status, offset);
+		printf("Offset calibration status: %d\nOffset correction value: %X\n", calibration_status, offset);
 	} else if(calibration_choice == 2) {
 		printf("Starting crosstalk calibration...\n");
 		calibration_status = VL53L1X_CalibrateXtalk(Dev, target_distance, &xtalk); /* may take few second to perform the xtalk cal */
-		printf("Crosstalk calibration status: %d. \nCrosstalk correction value: %X\n", calibration_status, xtalk);
+		printf("Crosstalk calibration status: %d\nCrosstalk correction value: %X\n", calibration_status, xtalk);
 	}
+	else {
+		printf("Invalid choice.\n");
+	}
+	printf("-----Lidar Readings-----\n");
 
 	// int16_t get_offset;
 	// uint16_t get_xtalk;
